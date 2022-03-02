@@ -1,10 +1,21 @@
 const allPhones = () => {
+    document.getElementById('single-phone-detail').innerHTML = "";
+    document.getElementById('spiner').style.display = 'block';
     const searchValue = document.getElementById('search-box').value;
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchValue}`;
     //console.log(url);
     fetch(url)
     .then((Response) => Response.json())
-    .then((data) => showPhone(data.data.slice(0,20)));
+    .then((data) => {
+        if(data.data == null){
+            document.getElementById('spiner').style.display = 'block'; 
+        }else{
+            showPhone(data.data.slice(0,20))
+            document.getElementById('spiner').style.display = 'none';
+        }
+    });
+
+    
 }
 const showPhone = data => {
      console.log(data);
@@ -34,21 +45,33 @@ const showPhone = data => {
        const url = `https://openapi.programming-hero.com/api/phone/${info}`;
        fetch(url)
        .then(res => res.json())
-       .then(data => displayPhoneDetail(data.data.mainFeatures));
+       .then(data => displayPhoneDetail(data.data));
 
    }
+  
    const displayPhoneDetail = (mainFeatures) =>{
     console.log(mainFeatures);
     const phoneDetail = document.getElementById('single-phone-detail');
     const div = document.createElement('div')
     div.classList.add('card');
     div.innerHTML = `
-    
-    <p class="card-title"><span class="detail-head">Storage:</span>${mainFeatures.storage}</p>
-   <p class="card-text"><span class="detail-head">Display:</span> ${mainFeatures.displaySize}</p>
-   <p class="card-text"><span class="detail-head">ChipSet:</span> ${mainFeatures.chipSet}</p>
-   <p class="card-text"><span class="detail-head">Sensors:</span> ${mainFeatures.sensors}</p>
-   <p class="card-text"><span class="detail-head">Display:</span> ${mainFeatures.displaySize}</p>
+    <div class="card mb-3 phone-details w-100 m-auto">
+        <div class="row g-0">
+            <div class="col-md-5">
+                   <img src="${mainFeatures.image}" class="card-img-top w-50" alt="No Phone Found">
+            </div>
+            <div class="col-md-7">
+                   <p class="card-title"><span class="detail-head">Name: </span> ${mainFeatures.name}</p>
+                   <p class="card-text"><span class="detail-head">Display:</span> ${mainFeatures.mainFeatures.displaySize}</p>
+                    <p class="card-title"><span class="detail-head">Storage: </span> ${mainFeatures.mainFeatures.storage}</p>
+                    <p class="card-text"><span class="detail-head">Sensors: </span> ${mainFeatures.mainFeatures.sensors}</p>
+                  <p class="card-text"><span class="detail-head">ReleaseDate: </span> ${mainFeatures.releaseDate}</p>
+                  <p class="card-text"><span class="detail-head">Others(WLAN): </span> ${mainFeatures.others.WLAN}</p>
+                  
+            </div>
+        </div>
+    </div>
+   
 
     `;
     phoneDetail.appendChild(div);
