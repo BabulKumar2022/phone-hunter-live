@@ -36,12 +36,10 @@ const showPhone = data => {
         </div>`; 
         searchResult.appendChild(div);
      })
-    
-     
-    }
+    };
       
    const details = (info) =>{
-       console.log(info);
+       //console.log(info);
        const url = `https://openapi.programming-hero.com/api/phone/${info}`;
        fetch(url)
        .then(res => res.json())
@@ -61,6 +59,7 @@ const showPhone = data => {
                    <img src="${mainFeatures.image}" class="card-img-top p-2 w-50" alt="No Phone Found">
             </div>
             <div class="col-md-7">
+                    <h3 class="text-center">Details Infomation</h3>
                    <p class="card-title"><span class="detail-head">Name: </span> ${mainFeatures.name}</p>
                    <p class="card-text"><span class="detail-head">Display:</span> ${mainFeatures.mainFeatures.displaySize}</p>
                     <p class="card-title"><span class="detail-head">Storage: </span> ${mainFeatures.mainFeatures.storage}</p>
@@ -71,11 +70,10 @@ const showPhone = data => {
             </div>
         </div>
     </div>
-   
 
     `;
     phoneDetail.appendChild(div);
-   }
+   };
 
 
 
