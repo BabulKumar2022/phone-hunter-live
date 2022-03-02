@@ -58,7 +58,7 @@ const showPhone = data => {
     <div class="card mb-3 phone-details w-100 m-auto">
         <div class="row g-0">
             <div class="col-md-5">
-                   <img src="${mainFeatures.image}" class="card-img-top w-50" alt="No Phone Found">
+                   <img src="${mainFeatures.image}" class="card-img-top p-2 w-50" alt="No Phone Found">
             </div>
             <div class="col-md-7">
                    <p class="card-title"><span class="detail-head">Name: </span> ${mainFeatures.name}</p>
